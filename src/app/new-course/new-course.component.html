@@ -1,0 +1,26 @@
+<form #f="ngForm" (ngSubmit)="create(f)" ngNativeValidate>
+  <div class="form-group">
+    <label for="name">Coursee Name</label>
+    <input required minlength="3" id="name"  ngModel name="cName" #name="ngModel" type="text" class="form-control">
+    <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+       
+      <div *ngIf="name.errors.required">Required Field</div>
+      <div *ngIf="name.errors.minlength.required">Min chars error</div>
+    </div>
+  </div>
+   <div class="form-group">
+    <label for="categoryName">Category</label>
+    <select ngModel name="categoryName" id="categoryName" #name="ngModel" class="form-control">
+      <option value=""></option>
+      <option *ngFor="let name of categoryNames" [value]="name.id">{{name.Name}}</option>
+    </select>
+  </div>
+  <div class="form-control">
+    <label>
+      <input type="checkbox" ngModel name="guarantee">30 day money back guaratee
+    </label>
+  </div>
+  <p>{{f.value|json}}</p>
+  <br>
+  <button class="btn btn-primary" [disabled]="f.invalid" type="submit">Create</button> 
+</form>
